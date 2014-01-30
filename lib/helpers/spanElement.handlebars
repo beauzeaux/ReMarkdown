@@ -1,0 +1,9 @@
+{{{name}}} =
+    "{{{open}}}"
+    &{spanClose.push("{{{close}}}"); return true}
+    text:(t:Inline {return t} / &{removeSpanClose("{{{close}}}"); return false;})
+    &{return removeSpanClose("{{{close}}}");}
+    "{{{close}}}"
+{
+    return element("{{{name}}}", text);
+}

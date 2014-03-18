@@ -12,16 +12,17 @@ module.exports = function (grunt) {
                     ],
                     timeout: 10000
                 }
-            },
+            }
         },
         connect: {
             server: {
                 options: {
                     port: 8002,
-                    base: '.'
+                    base: '.',
+                    hostname: '*'
                 }
             }
-        },
+        }
     });
     grunt.registerTask('test', ['connect', 'qunit']);
-}
+};

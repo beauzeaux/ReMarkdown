@@ -1,7 +1,0 @@
-    BlockPrefix
-    c:"#"+ " "
-    &{return updateHeading(c.length)}
-    title:Inline
-    NewLine*
-    blocks:(!LowerHeading b:Block {return b})*
-    &{currentHeading = c.length - 1; vals = {"title" : title, "count" : c.length, "blocks": blocks}; return true;}

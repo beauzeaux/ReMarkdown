@@ -1,9 +1,10 @@
 {
-    "name"         : "reDocumented",
-    "description"  : "A parser for the reModeled Markdown grammar",
-    "author"       : "Nick Beaulieu <nsbeauli@princeton.edu>",
-    "dependencies" : {
-        "handlebars" : "1.1.x",
-        "pegjs" : "0.7.x"
+    "name": "ReMarkdown",
+    "version": "0.0.1",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-qunit": "~0.4.0",
+        "grunt-qunit-junit": "~0.1.0",
+        "grunt-contrib-connect": "~0.6.0"
     }
 }

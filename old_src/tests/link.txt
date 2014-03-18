@@ -1,0 +1,3 @@
+[Text](www.text.com)
+
+[<example>Text</example>](www.text.com)

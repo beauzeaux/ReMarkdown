@@ -1,5 +1,0 @@
-LowerHeading =
-    BlockPrefix
-    c:"#"+ " "
-    &{return lowerHeading(c.length);} // don't be a lower order heading or this fails
-    Inline

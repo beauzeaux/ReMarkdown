@@ -24,5 +24,5 @@ module.exports = function (grunt) {
             }
         }
     });
-    grunt.registerTask('test', ['connect', 'qunit']);
+    grunt.registerTask('test', ['connect', 'qunit_junit', 'qunit']);
 };

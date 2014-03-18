@@ -1,5 +1,0 @@
-"\\[c"
-NewLine?
-vals:(!"\\]" val:Text NewLine {return val;})*
-"\\]"
-

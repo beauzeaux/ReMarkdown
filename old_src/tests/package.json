@@ -1,9 +1,0 @@
-{
-    "name": "reDocumented",
-    "description": "A parser for the reModeled Markdown grammar",
-    "author": "Nick Beaulieu <nsbeauli@princeton.edu>",
-    "dependencies": {
-        "handlebars": "1.1.x",
-        "pegjs": "0.8.x"
-    }
-}

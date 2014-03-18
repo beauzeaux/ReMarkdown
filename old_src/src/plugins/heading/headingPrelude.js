@@ -1,1 +1,0 @@
-headingLevel = 1;

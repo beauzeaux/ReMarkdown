@@ -1,6 +1,6 @@
 define(
     ['dojo/_base/lang', 'dojo/_base/declare', 'dojo/string',
-        'dojo/Deferred', 'dojo/promise/all', 'dojo/when', 'Utils', 'text!ReMarkdown/PluginLoader/parser_template.pegjs'],
+        'dojo/Deferred', 'dojo/promise/all', 'dojo/when', 'ReMarkdown/Utils', 'text!ReMarkdown/PluginLoader/parser_template.pegjs'],
     function (lang, declare, dojoString, Deferred, all, when, Utils, parserTemplate) {
         var PluginLoader = declare(null, {
             _manifest: null, // the final manifest

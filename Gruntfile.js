@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                     exclude: /^test\/lib\//
                 },
                 files: {
-                    '_build/plato': ['test/**/*.js', 'PluginLoader/**/*.js', 'ElementFactory/**/*.js', 'ReMarkdown.js',
+                    '/var/www/dev/plato/': ['test/**/*.js', 'PluginLoader/**/*.js', 'ElementFactory/**/*.js', 'ReMarkdown.js',
                         'Utils.js']
                 }
             }

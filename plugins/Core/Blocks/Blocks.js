@@ -1,4 +1,4 @@
-define(["ReMarkdown/plugins/Core/Blocks/BlockElements"],
+define(["./BlockElements"],
     function (BlocksRenderer) {
         var manifest = {
             name: "Blocks",

@@ -1,5 +1,5 @@
 define(
-    ['dojo/string', 'text!ReMarkdown/plugins/Core/Paragraph/Paragraph.html', 'dojo/promise/all'],
+    ['dojo/string', 'text!./Paragraph.html', 'dojo/promise/all'],
     function (dojoString, template, all) {
         return function (promises) {
             //wait until every one of the inlines is done rendering

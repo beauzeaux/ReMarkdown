@@ -1,4 +1,4 @@
-define(['ReMarkdown/plugins/Core/Paragraph/ParagraphElement'],
+define(['./ParagraphElement'],
     function (ParagraphElement) {
         return manifest = {
             name: "Paragraph",

@@ -1,0 +1,33 @@
+{
+    "name": "ReMarkdown",
+    "version": "0.0.0",
+    "authors": [
+        "Nick Beaulieu <nsbeauli@princeton.edu>"
+    ],
+    "description": "The ReMarkdown parser",
+    "main": "ReMarkdown.js",
+    "moduleType": [
+        "amd"
+    ],
+    "keywords": [
+        "Markdown",
+        "Document",
+        "Preparation"
+    ],
+    "license": "MIT",
+    "homepage": "rmdocs.com",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "dojo": "~1.9.3",
+        "pegjs": "~0.8.0",
+        "requirejs-text": "~2.0.10",
+        "requirejs": "~2.1.11"
+    }
+}

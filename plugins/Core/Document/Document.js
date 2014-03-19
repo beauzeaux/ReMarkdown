@@ -1,4 +1,4 @@
-define(['ReMarkdown/plugins/Core/Document/DocumentElement'],
+define(['./DocumentElement'],
     function (DocumentElement) {
         var manifest = {
             name: "Document",

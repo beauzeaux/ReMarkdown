@@ -1,4 +1,4 @@
-define(['text!PluginTests/basic/basic.pegjs'],
+define(['text!./basic.pegjs'],
     function (grammar) {
         var manifest = {
             name: "Basic",

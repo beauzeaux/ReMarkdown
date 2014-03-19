@@ -1,11 +1,11 @@
-define(['dojo/when', 'ReMarkdown/PluginLoader/PluginLoader',
-    'ReMarkdown/ElementFactory/ElementFactory', 'pegjs',
-    'text!plugins/Core/ParagraphBasic.html', 'text!plugins/Core/BlocksBasic.html', 'text!plugins/Core/DocumentBasic.html',
-    'text!plugins/Core/ParagraphAsync.html', 'text!plugins/Core/BlocksAsync.html'
+define(['dojo/when', '../../../PluginLoader/PluginLoader',
+    '../../../ElementFactory/ElementFactory', 'pegjs',
+    'text!./ParagraphBasic.html', 'text!./BlocksBasic.html', 'text!./DocumentBasic.html',
+    'text!./ParagraphAsync.html', 'text!./BlocksAsync.html'
 ],
     function (when, PluginLoader, ElementFactory, pegjs, BasicParagraph, BasicBlocks, BasicDocument, AsyncParagraph, AsyncBlocks) {
         asyncTest("Basic Loading: Core", 2, function () {
-            var pl = new PluginLoader(['ReMarkdown/plugins/Core/Core']);
+            var pl = new PluginLoader(['Core/Core']);
             var gPromise = pl.grammar();
             var pegTest = function (grammar) {
                 try {
@@ -24,7 +24,7 @@ define(['dojo/when', 'ReMarkdown/PluginLoader/PluginLoader',
         });
         asyncTest("Basic Rendering: Core", 4, function () {
             stop(3);
-            var pl = new PluginLoader(['ReMarkdown/plugins/Core/Core']);
+            var pl = new PluginLoader(['Core/Core']);
             var rPromise = pl.renderers();
             when(rPromise, function (renderers) {
                 ok(true, "Plugin Loaded");
@@ -56,7 +56,7 @@ define(['dojo/when', 'ReMarkdown/PluginLoader/PluginLoader',
 
         asyncTest("Async Rendering: Core", 3, function () {
             stop(2);
-            var pl = new PluginLoader(['ReMarkdown/plugins/Core/Core', 'plugins/async/async']);
+            var pl = new PluginLoader(['Core/Core', 'TestPlugins/async/async']);
             var rPromise = pl.renderers();
             when(rPromise, function (renderers) {
                 ok(true, "Plugin Loaded");

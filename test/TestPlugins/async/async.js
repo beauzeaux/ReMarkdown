@@ -1,4 +1,4 @@
-define(['text!PluginTests/async/async.pegjs', 'PluginTests/async/asyncElement'],
+define(['text!./async.pegjs', './asyncElement'],
     function (grammar, element) {
         var manifest = {
             name: "AsyncTester",

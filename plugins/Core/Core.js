@@ -6,14 +6,14 @@
  * - Documents
  * - Paragraphs
  */
-define(["ReMarkdown/PluginLoader/PluginLoader", "dojo/when"],
+define(["../../PluginLoader/PluginLoader", "dojo/when"],
     function (PluginLoader, when) {
         var plugins = [
-            "ReMarkdown/plugins/Core/Paragraph/Paragraph",
-            "ReMarkdown/plugins/Core/Document/Document",
-            "ReMarkdown/plugins/Core/Blocks/Blocks",
+            "Core/Paragraph/Paragraph",
+            "Core/Document/Document",
+            "Core/Blocks/Blocks",
         ];
         var pLoader = new PluginLoader(plugins);
         var promise = pLoader.manifest();
         return promise;
-    })
+    });

@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/_base/lang", "dojo/when", "dojo/promise/all", 'pegjs',
-    "ReMarkdown/ElementFactory/ElementFactory", "ReMarkdown/PluginLoader/PluginLoader"],
+    "./ElementFactory/ElementFactory", "./PluginLoader/PluginLoader"],
     function (declare, lang, when, all, pegjs, ElementFactory, PluginLoader) {
         var ReMarkdown = declare(null, {
             _options: {
@@ -9,7 +9,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/when", "dojo/promise/all"
                  * remove one of the defaults
                  */
                 pluginList: [
-                    "ReMarkdown/plugins/Core/Core"
+                    "Core/Core"
                 ],
             },
 

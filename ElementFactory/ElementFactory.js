@@ -10,6 +10,7 @@ define(
                 else {
                     console.error("[ReMarkdown][ElementFactory]Unknown Element Type: " + type);
                     return "Unknown Element Type: " + type;
+                    w
                 }
             },
             constructor: function (factories) {

@@ -1,17 +1,11 @@
-/**
- * Created by Nicholas on 2/7/14.
- */
 requirejs.config({
     paths: {
-        "dojo": "../lib/dojo-release-1.9.2-src/dojo",
-        "dojox": "../lib/dojo-release-1.9.2-src/dojox",
-        Utils: '../Utils',
-        text: '../lib/require/text',
-        order: '../lib/require/order',
-        pegjs: '../lib/pegjs/peg-0.8.0',
-        'ReMarkdown': '../',
-        "PluginTests": './plugins',
-        'Base': '../plugins/Base'
+        "dojo": "../bower_components/dojo",
+        "text": "../bower_components/requirejs-text/text",
+        "pegjs": "../lib/peg-0.8.0.min",
+        "Core": "../plugins/Core",
+        "TestPlugins": './TestPlugins',
+        "order": './lib/order'
     },
     waitSeconds: 15,
     shim: {
@@ -19,23 +13,12 @@ requirejs.config({
             exports: 'PEG'
         },
     },
-    packages: [
-        {
-            name: 'basic',
-            location: 'plugins/basic',
-            main: 'basic.js'
-        },
-    ],
 });
 var tests = [
-    //'rjs'
-    'PluginLoader/test',
-    'ElementFactory/test',
-    'plugins/Core/test',
-    'ReMarkdownTests'
-    //'plugins/Base/test'
-    //'deferredtests',
-    //'requiredefine'
+    './PluginLoader/test',
+    './ElementFactory/test',
+    './plugins/Core/test',
+    './ReMarkdownTests'
 ];
 var reqs = tests.map(function (req) {
     return "order!" + req

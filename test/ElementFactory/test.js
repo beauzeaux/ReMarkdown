@@ -1,7 +1,7 @@
-define(['dojo/when', 'ReMarkdown/PluginLoader/PluginLoader', 'ReMarkdown/ElementFactory/ElementFactory'],
+define(['dojo/when', '../../PluginLoader/PluginLoader', '../../ElementFactory/ElementFactory'],
     function (when, PluginLoader, ElementFactory) {
         asyncTest("Element Factory: basic plugin", 2, function () {
-            var pl = new PluginLoader(['PluginTests/basic/basic']);
+            var pl = new PluginLoader(['TestPlugins/basic/basic']);
             var rPromise = pl.renderers();
             when(rPromise, function (renderers) {
                 var ef = new ElementFactory(renderers);
@@ -13,7 +13,7 @@ define(['dojo/when', 'ReMarkdown/PluginLoader/PluginLoader', 'ReMarkdown/Element
         });
         asyncTest("Element Factory: async plugin", 2, function () {
             stop();//add dependency for another start
-            var pl = new PluginLoader(['PluginTests/async/async']);
+            var pl = new PluginLoader(['TestPlugins/async/async']);
             var rPromise = pl.renderers();
             when(rPromise, function (renderers) {
                 var ef = new ElementFactory(renderers);

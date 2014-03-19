@@ -1,7 +1,7 @@
-define(['dojo/when', 'ReMarkdown/PluginLoader/PluginLoader', 'TestUtils'],
+define(['dojo/when', '../../PluginLoader/PluginLoader', '../TestUtils'],
     function (when, PluginLoader, TestUtils) {
         asyncTest("Plugin Loader: basic plugin", 2, function () {
-            var pl = new PluginLoader(['PluginTests/basic/basic']);
+            var pl = new PluginLoader(['TestPlugins/basic/basic']);
             var gPromise = pl.grammar();
             when(gPromise, function (grammar) {
                 ok(true, "Plugin Loaded Exited");
@@ -10,7 +10,7 @@ define(['dojo/when', 'ReMarkdown/PluginLoader/PluginLoader', 'TestUtils'],
             });
         });
         asyncTest("Plugin Loader: async plugin", 2, function () {
-            var pl = new PluginLoader(['PluginTests/async/async']);
+            var pl = new PluginLoader(['TestPlugins/async/async']);
             var gPromise = pl.grammar();
             when(gPromise, function (grammar) {
                 ok(true, "Plugin Loaded Exited");

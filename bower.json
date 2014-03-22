@@ -1,6 +1,6 @@
 {
     "name": "ReMarkdown",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "authors": [
         "Nick Beaulieu <nsbeauli@princeton.edu>"
     ],
@@ -26,9 +26,6 @@
     ],
     "dependencies": {
         "dojo": "~1.9.3",
-        "pegjs": "~0.8.0",
-        "requirejs-text": "~2.0.10",
-        "requirejs": "~2.1.11",
-        "qunit": "~1.14.0"
-    }
+        "pegjs": "~0.8.0"
+    },
 }

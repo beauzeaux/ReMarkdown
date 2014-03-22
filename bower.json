@@ -27,5 +27,5 @@
     "dependencies": {
         "dojo": "~1.9.3",
         "pegjs": "~0.8.0"
-    },
+    }
 }

@@ -1,16 +1,16 @@
-define(['dojo/text!./basic.pegjs'],
+define(['dojo/text!./sync.pegjs'],
     function (grammar) {
         var manifest = {
-            name: "Basic",
+            name: "Sync",
             grammar: {
                 preludes: [],
                 blocks: [],
-                spans: ["Basic"],
+                spans: ["Sync"],
                 grammar: grammar
             },
             renderers: {
-                Example: function (values) {
-                    return "TEST:" + values;
+                Sync: function (values) {
+                    return "Sync:" + values;
                 }
             }
         };

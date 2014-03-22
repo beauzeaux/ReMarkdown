@@ -8,7 +8,7 @@ define(["dojo/Deferred", "dojo/when"],
             //wait on all prior asyncs to finish
             when(rPromise, function (text) {
                 setTimeout(function () {
-                    df.resolve("ASYNCTEST:" + text);
+                    df.resolve("Async:" + text);
                 }, 1000);
             });
             return df.promise;

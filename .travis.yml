@@ -4,7 +4,7 @@ node_js:
 env:
   global:
     - SAUCE_USERNAME: ReMarkdown
-    - SAUCE_PASSWORD: b9735d6f-48e0-4aac-99ed-cc12f523eeaf
+    - SAUCE_ACCESS_KEY: b9735d6f-48e0-4aac-99ed-cc12f523eeaf
 before_install:
   - npm install -g bower
 install:

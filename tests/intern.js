@@ -51,7 +51,9 @@ define(
             // publishing this configuration file somewhere
             webdriver: {
                 host: 'localhost',
-                port: 4444
+                port: 4444,
+                SAUCE_USERNAME: 'ReMarkdown',
+                SAUCE_ACCESS_KEY: 'b9735d6f-48e0-4aac-99ed-cc12f523eeaf'
             },
 
             // The desired AMD loader to use when running unit tests (client.html/client.js). Omit to use the default Dojo

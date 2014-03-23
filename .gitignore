@@ -1,5 +1,8 @@
+.idea
 _build
 node_modules
+bower_components
 mongoose.conf
 mongoose-5.1.exe
 old_src
+old

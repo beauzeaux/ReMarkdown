@@ -5,9 +5,8 @@ env:
   global:
     - SAUCE_USERNAME: username
     - SAUCE_PASSWORD: access-key
-before_script:
+before_install:
   - npm install -g bower
-
 install:
   - bower install
   - npm install

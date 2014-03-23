@@ -24,7 +24,10 @@ define(
             // Note that the `build` capability will be filled in with the current commit ID from the Travis CI environment
             // automatically
             capabilities: {
-                'selenium-version': '2.37.0'
+                'selenium-version': '2.37.0',
+                'idle-timeout': 60,
+                'max-duration': 90,
+                'video-upload-on-pass': false
             },
 
             // Browsers to run integration testing against. Note that version numbers must be strings if used with Sauce

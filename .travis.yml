@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 0.8
+env:
+  global:
+    - SAUCE_USERNAME: username
+    - SAUCE_PASSWORD: access-key
+before_script:
+  - npm install -g bower
+
+install:
+  - bower install
+  - npm install
+script: node node_modules/intern/runner.js config=tests/intern
+

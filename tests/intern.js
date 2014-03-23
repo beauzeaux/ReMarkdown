@@ -12,10 +12,10 @@ define(
         has.add("dojo-has-api", true);
         return {
             // The port on which the instrumenting proxy will listen
-            proxyPort: 10101,
+            proxyPort: 49221,
 
             // A fully qualified URL to the Intern proxy
-            proxyUrl: 'http://localhost:10101/',
+            proxyUrl: 'http://localhost:49221/',
 
             // Default desired capabilities for all environments. Individual capabilities can be overridden by any of the
             // specified browser environments in the `environments` array below as well. See

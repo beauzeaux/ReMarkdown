@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-  - 0.8
+  - 0.
 env:
   global:
-    - SAUCE_USERNAME: username
-    - SAUCE_PASSWORD: access-key
+    - SAUCE_USERNAME: ReMarkdown
+    - SAUCE_PASSWORD: b9735d6f-48e0-4aac-99ed-cc12f523eeaf
 before_install:
   - npm install -g bower
 install:

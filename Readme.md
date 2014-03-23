@@ -1,5 +1,7 @@
 # ReMarkdown
 
+![Build Results](https://travis-ci.org/beauzeaux/ReMarkdown.svg)
+
 The ReMarkdown parser is a modular markdown parser supporting external plugins for additional element types beyond those
 defined by John Gruber for the [original markdown](http://daringfireball.net/projects/markdown/).
 

@@ -12,10 +12,10 @@ define(
         has.add("dojo-has-api", true);
         return {
             // The port on which the instrumenting proxy will listen
-            proxyPort: 9000,
+            proxyPort: 10101,
 
             // A fully qualified URL to the Intern proxy
-            proxyUrl: 'http://localhost:9000/',
+            proxyUrl: 'http://localhost:10101/',
 
             // Default desired capabilities for all environments. Individual capabilities can be overridden by any of the
             // specified browser environments in the `environments` array below as well. See
@@ -51,16 +51,14 @@ define(
             // publishing this configuration file somewhere
             webdriver: {
                 host: 'localhost',
-                port: 4444,
-                SAUCE_USERNAME: 'ReMarkdown',
-                SAUCE_ACCESS_KEY: 'b9735d6f-48e0-4aac-99ed-cc12f523eeaf'
+                port: 4444
             },
 
             // The desired AMD loader to use when running unit tests (client.html/client.js). Omit to use the default Dojo
             // loader
             useLoader: {
-                //'host-node'   : 'bower_components/dojo/dojo',
-                'host-browser': 'bower_components/dojo/dojo.js'
+                //'host-node'   : 'dojo/dojo',
+                //'host-browser': 'bower_components/dojo/dojo.js'
             },
 
             // Configuration options for the module loader; any AMD configuration options supported by the specified AMD loader

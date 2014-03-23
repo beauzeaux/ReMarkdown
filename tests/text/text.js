@@ -3,7 +3,7 @@ define([
     "dojo/_base/kernel",
     "require",
     "dojo/has",
-    "dojo/has!host-browser?./request"],
+    "dojo/has!host-browser?dojo/request"],
     function(dojo, require, has, request){
 	// module:
 	//		dojo/text

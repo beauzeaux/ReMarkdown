@@ -78,12 +78,14 @@ define(
                     { name: 'dojo', location: './bower_components/dojo' },
                     { name: 'TestPlugins', location: './tests/TestPlugins'},
                     { name: 'Core', location: './src/plugins/Core'},
-                    { name: 'ReMarkdown', location: './src/ReMarkdown' }
+                    { name: 'ReMarkdown', location: './src/ReMarkdown' },
+                    { name: 'dojox', location: './bower_components/dojox' },
+                    { name: 'xml', location: './tests/xml'}
                 ]
             },
 
             // Non-functional test suite(s) to run in each browser
-            suites: [ 'tests/PluginLoader', 'tests/ElementFactory' ],
+            suites: [ 'tests/PluginLoader', 'tests/ElementFactory', 'tests/xmlCompare', 'tests/plugins/Core' ],
 
             // Functional test suite(s) to run in each browser once non-functional tests are completed
             functionalSuites: [ /* 'myPackage/tests/functional' */ ],

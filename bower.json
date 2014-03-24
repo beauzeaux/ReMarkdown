@@ -1,6 +1,6 @@
 {
     "name": "ReMarkdown",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "authors": [
         "Nick Beaulieu <nsbeauli@princeton.edu>"
     ],
@@ -27,5 +27,8 @@
     "dependencies": {
         "dojo": "~1.9.3",
         "pegjs": "~0.8.0"
+    },
+    "devDependencies": {
+        "dojox": "~1.9.3"
     }
 }

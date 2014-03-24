@@ -82,8 +82,8 @@ define([
                 return doc; //DOMDocument
             }
         } else if (has("host-node")) {
-            var DOMParser = xmldom.DOMParser;
-            var parser = new DOMParser();
+            var DOMP = xmldom.DOMParser;
+            var parser = new DOMP();
             doc = parser.parseFromString(str, mimetype);
             var de = doc.documentElement;
             var errorNS = "http://www.mozilla.org/newlayout/xml/parsererror.xml";

@@ -1,10 +1,6 @@
-AsyncTester =
+Async =
     "<async>"
-text:$(!"</async>"
-!NewLine
-c:.
-)
-+
+    text:$(!"</async>" !NewLine c:.)+
     "</async>"
 {
     //Use the ParserFactory to create a span parser

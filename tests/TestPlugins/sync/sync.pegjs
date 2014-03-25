@@ -1,10 +1,6 @@
-Basic =
+Sync =
     "<sync>"
-text:$(!"</sync>"
-!NewLine
-c:.
-)
-+
+    text:$(!"</sync>" !NewLine c:. )+
     "</sync>"
 {
     //Use the ParserFactory to create a span parser

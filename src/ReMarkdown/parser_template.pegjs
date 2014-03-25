@@ -4,26 +4,21 @@
 }
 
 start =
-    document
-:
-Document
+    document:Document
 {
     return document;
 }
 
 Document =
-    blocks
-:
-Blocks
+    blocks:Blocks
 {
     var ret = options.elementFactory.element('Document', blocks);
     return ret;
 }
 SpanStart =
-    value
-:
-Span
-NewLine * EOF
+    value:Span
+    NewLine*
+    EOF
 {
     return value;
 }
@@ -35,8 +30,8 @@ Prelude =
 BlockElement =
     ${blocks}
     Paragraph /
-        Singleton /
-        FAILURE
+    Singleton /
+    FAILURE
 
 Span =
     ${spans}
@@ -45,52 +40,35 @@ Span =
 // Pre-Defined Elements
 
 Block =
-    EmptyLine *
-        element
-:
-BlockElement
+    EmptyLine*
+    element:BlockElement
 (EmptyLine / EmptyLine * EOF)
 {
     return element;
 }
 
 Blocks =
-    blocks
-:
-Block +
+    blocks:Block+
 {
     return options.elementFactory.element('Blocks', blocks)
 }
 
 Paragraph =
-    vals
-:
-(val
-:
-Inline + NewLine ? {return val.join('')}
-)
-+
+    vals:(val:Inline+ NewLine? {return val.join('')})+
 {
     var element = options.elementFactory.element('Paragraph', vals);
-return element;
+    return element;
 }
 
 Singleton =
-    vals
-:
-(val
-:
-Inline
-)
+    vals:(val:Inline)
 {
     var ret = vals.join('');
     return ret;
 }
 
 Inline =
-    values
-:
-(Span / Text) +
+    values:(Span / Text)+
 {
     return values;
 }
@@ -98,18 +76,17 @@ Inline =
 
 //A Single non-span starting non-span ending and non-newline character
 
-TextChar = !Span
-!NewLine
-char:.
+TextChar =
+    !Span
+    !NewLine
+    char:.
 {
     return char;
 }
 
 //Text
 Text =
-    text
-:
-TextChar +
+    text:TextChar+
 {
     //return just a string
     return text.join('');
@@ -117,23 +94,19 @@ TextChar +
 
 //Empty Line
 EmptyLine =
-    (' ' / '\t') *
-        NewLine
+    (' ' / '\t')*
+    NewLine
 
 //New Line
 NewLine =
-    '\r' ? '\n'
+    '\r'?
+    '\n'
 
 //End of File
-    EOF
-        = !
-.
+EOF = !.
 
 //Failure rule (always returns false)
 FAILURE =
-&
-{
-    return false;
-}
+&{return false;}
 
 ${grammar}

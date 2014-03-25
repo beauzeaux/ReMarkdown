@@ -1,15 +1,25 @@
 define(
-    ['dojo/_base/lang', 'dojo/_base/declare', 'dojo/string',
-     'dojo/Deferred', 'dojo/promise/all', 'dojo/when', 'dojo/text!./parser_template.pegjs'],
-    function (lang, declare, dojoString, Deferred, all, when, parserTemplate) {
-        var PluginLoader = declare(null, {
+    [
+        'dojo/_base/lang',
+        'dojo/_base/declare',
+        'dojo/_base/array',
+        'dojo/string',
+        'dojo/Deferred',
+        'dojo/promise/all',
+        'dojo/when',
+        'dojo/text!./parser_template.pegjs'
+    ],
+    function (lang, declare, dojoArray, dojoString, Deferred, all, when, parserTemplate) {
+        'use strict';
+        //noinspection JSLint
+        return declare(null, {
             _manifest: null, // the final manifest
             _grammar: null, // the final grammar (for PEG.js)
             _renderers: null, // the final renderers object (for ElementFactory)
             /**
              * @private
              * Loads a list of manifest files for the individual plugins and plugin packages
-             * This function is asyncronus and is intended to run in the background
+             * This function is async and is intended to run in the background
              *
              */
             _loadPlugins: function (pluginList) {
@@ -23,7 +33,7 @@ define(
                  * | Requirejs loader
                  * | | Promise for manifest or manifest which resolves outermost promise
                  */
-                var manifests = pluginList.map(function (pluginName, i, arr) {
+                var manifests = pluginList.map(function (pluginName) {
                     //The promise for the manifest
                     var deferred = new Deferred();
                     require(['dojo/_base/lang', 'dojo/when', pluginName],
@@ -33,7 +43,7 @@ define(
                              manifest. The when abstraction handles either, so when the manifest
                              is available resolve the deferred object with that manifest.
                              */
-                            when(pluginPromise, function (manifest) {
+                            when(pluginPromise).then(function (manifest) {
                                 deferred.resolve(manifest);
                             });
                         }
@@ -44,63 +54,64 @@ define(
                 // 1) creating the final manifest which represents all the loaded plugins
                 // 2) creating the grammar for PEG.js
                 // 3) creating the renderers object for the Element Factory
-
+                //noinspection JSLint
                 this._manifest = all(manifests).then(function (manifests) {
-                    //first merge all the manifests into the final manifest
-                    //TODO: clean this looping mess up
-                    var Manifest = {
+                    //helper function for collapsing an array of objects
+                    var mergeProperty = function (arr, prop) {
+                        return dojoArray.filter(
+                            [].concat.apply([],
+                                arr.map(
+                                    function (obj) {
+                                        return obj[prop];
+                                    }
+                                )
+                            ),
+                            function (item) {//filter out the null objects
+                                return item !== null;
+                            }
+                        );
+                    };
+
+                    //merge the grammar objects
+                    var grammars = mergeProperty(manifests, 'grammar');
+                    var renderers = mergeProperty(manifests, 'renderers');
+
+                    //create the final manifest
+                    return {
                         name: "PluginLoader Manifest",
                         grammar: {
-                            preludes: [].concat.apply([], manifests.map(function (manifest) {
-                                return manifest.grammar.prelude;
-                            })),
-                            blocks: [].concat.apply([], manifests.map(function (manifest) {
-                                return manifest.grammar.blocks;
-                            })),
-                            spans: [].concat.apply([], manifests.map(function (manifest) {
-                                return manifest.grammar.spans;
-                            })),
-                            grammar: [].concat.apply([], manifests.map(function (manifest) {
-                                return manifest.grammar.grammar;
-                            })).join("\n")
+                            preludes: mergeProperty(grammars, 'preludes'),
+                            blocks: mergeProperty(grammars, 'blocks'),
+                            spans: mergeProperty(grammars, 'spans'),
+                            grammar: mergeProperty(grammars, 'grammar').join("\n")
                         },
-                        renderers: lang.mixin.apply({},
-                            [].concat.apply([],
-                                manifests.map(function (manifest) {
-                                    return manifest.renderers;
-                                })))
-                    }
-                    //console.log("[ReMarkdown][PluginLoader]Final Manifest generated...");
-                    return Manifest;
+                        renderers: lang.mixin.apply({}, renderers)
+                    };
+
                 });
                 // Once the final manifest is ready, go ahead and generate the grammar
                 // and the renderers
-                this._renderers = when(this._manifest, function (manifest) {
+                this._renderers = when(this._manifest).then(function (manifest) {
                     return manifest.renderers;
                 });
-                this._grammar = when(this._manifest, function (manifest) {
+                this._grammar = when(this._manifest).then(function (manifest) {
+                    //console.log(manifest);
                     var replace = {
                         preludes: manifest.grammar.preludes.join("\n"),
                         blocks: manifest.grammar.blocks.join("/\n    "),
                         spans: manifest.grammar.spans.join("/\n   "),
                         grammar: manifest.grammar.grammar
-                    }
+                    };
                     if (manifest.grammar.blocks.length > 0) {
-                        replace.blocks += "/"
+                        replace.blocks += "/";
                     }
                     if (manifest.grammar.spans.length > 0) {
-                        replace.spans += "/"
+                        replace.spans += "/";
                     }
                     //form the replacement strings
                     //do the substitution inside the template
-                    grammar = dojoString.substitute(parserTemplate, manifest.grammar);
-                    //console.log("[ReMarkdown][PluginLoader]Final Grammar generated...");
-                    return grammar;
+                    return dojoString.substitute(parserTemplate, replace);
                 });
-                all([this._manifest, this._grammar, this._renderers]).then(function (results) {
-                    //console.log("[ReMarkdown][PluginLoader]PluginLoader finished");
-                })
-
             },
 
             /**
@@ -113,7 +124,7 @@ define(
 
             /**
              * Load a final manifest for the
-             * @returns {A final Manifest file for all the loaded plugins | A promise for the formentioned manifest}
+             * @returns {Object}
              */
             manifest: function () {
                 return this._manifest;
@@ -129,6 +140,5 @@ define(
                 return this._renderers;
             }
         });
-        return PluginLoader;
     }
 );

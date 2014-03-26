@@ -85,7 +85,7 @@ define(
             },
 
             // Non-functional test suite(s) to run in each browser
-            suites: [ 'tests/PluginLoader', 'tests/ElementFactory', 'tests/xmlCompare', 'tests/plugins/Core' ],
+            suites: [ 'tests/PluginLoader', 'tests/ElementFactory', 'tests/xmlCompare', 'tests/plugins/Core/Core' ],
 
             // Functional test suite(s) to run in each browser once non-functional tests are completed
             functionalSuites: [ /* 'myPackage/tests/functional' */ ],

@@ -6,8 +6,11 @@ define([
     "dojo/Deferred",
     "dojo/promise/all",
     "xml/parser",
-    "xml/equal"
-], function (registerSuite, assert, PluginLoader, ElementFactory, Deferred, all, dojoXML, xmlCmp) {
+    "xml/equal",
+    "ReMarkdown/pegjs",
+    //These are just to load the individual tests!
+    "./Paragraph"
+], function (registerSuite, assert, PluginLoader, ElementFactory, Deferred, all, dojoXML, xmlCmp, pegjs) {
     registerSuite({
         name: 'Core Plugins',
         setup: function () {
@@ -18,6 +21,25 @@ define([
         },
         "Creation": function () {
             assert(pl != null, "New Creates a non-null plugin loader");
+        },
+        "Valid Grammar": function () {
+            var dfd = this.async(100000);
+            parser = pl.grammar();
+            parser.then(function (grammar) {
+                var ret;
+                //Don't crash the testing suite with thrown errors
+                try {
+                    ret = pegjs.buildParser(grammar);
+                    return ret;
+                } catch (ex) {
+                    ret = null;
+                    return ret;
+                }
+            });
+            parser.then(dfd.callback(function (parser) {
+                    assert(parser != null, "Grammar is valid");
+                }
+            ));
         },
         "Plugin Manifest": function () {
             return pl.manifest().then(function (manifest) {

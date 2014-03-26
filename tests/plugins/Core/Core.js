@@ -9,7 +9,8 @@ define([
     "xml/equal",
     "ReMarkdown/pegjs",
     //These are just to load the individual tests!
-    "./Paragraph"
+    "./Paragraph",
+    "./Document"
 ], function (registerSuite, assert, PluginLoader, ElementFactory, Deferred, all, dojoXML, xmlCmp, pegjs) {
     registerSuite({
         name: 'Core Plugins',

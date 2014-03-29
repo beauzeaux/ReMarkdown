@@ -1,6 +1,7 @@
 define([
     "intern!object",
     "intern/chai!assert",
+    "ReMarkdown",
     "ReMarkdown/PluginLoader",
     "ReMarkdown/ElementFactory",
     "dojo/string",
@@ -10,16 +11,18 @@ define([
     "xml/equal",
     "ReMarkdown/pegjs"
 ],
-    function (registerSuite, assert, PluginLoader, ElementFactory, dojoString, Deferred, all, dojoXML, xmlCmp, pegjs) {
+    function (registerSuite, assert, ReMarkdown,
+              PluginLoader, ElementFactory, dojoString,
+              Deferred, all, dojoXML, xmlCmp, pegjs) {
         /**
          * Tests a plugin or plugin collection against the basic sanity checks
          * @param def an object of the form
          * {
-     *   name: STRING,
-     *   paths: [STRING], //the loading path of the plugin (should be defined for the dojo loader)
-     *   blocks: [STRING], //the block elements defined by the plugin
-     *   spans: [STRING] //the span elements defined by the plugin
-     * }
+         *   name: STRING,
+         *   paths: [STRING], //the loading path of the plugin (should be defined for the dojo loader)
+         *   blocks: [STRING], //the block elements defined by the plugin
+         *   spans: [STRING] //the span elements defined by the plugin
+         * }
          * @constructor
          */
         var TestPlugin = function (def) {
@@ -114,8 +117,32 @@ define([
                     });
                 }
             });
-        }
+        };
+
+        var TestParse = function(def) {
+            registerSuite({
+                name: 'ParseTest: ' + def.name,
+                setup: function () {
+                    var pluginList = ["TestPlugins/TestPlugins"].concat(def.paths);
+                    parser = new ReMarkdown({pluginList: pluginList});
+                },
+                "Parsing": function(){
+                    dfd = this.async(10000, def.tests.length);
+                    def.tests.map(function(test){
+                        var promise = parser.parse(test[0]);
+                        promise.then(dfd.resolve(function(result){
+                            var a = dojoXML.parse(test[1]);
+                            var b = dojoXML.parse(result);
+                            var cmp = new xmlCmp();
+                            var ret = cmp.areEqual(a,b);
+                            assert(ret, "Parse test");
+                        }));
+                    });
+                }
+            });
+        };
         return {
-            TestPlugin: TestPlugin
+            TestPlugin: TestPlugin,
+            TestParse: TestParse
         }
     });

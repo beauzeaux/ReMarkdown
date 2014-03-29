@@ -1,5 +1,5 @@
 define([
-    "./quote"
+    "./quote/main"
 ], function(){
 
 });

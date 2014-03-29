@@ -80,7 +80,8 @@ define(
                     { name: 'Core', location: './src/plugins/Core'},
                     { name: 'ReMarkdown', location: './src/ReMarkdown' },
                     { name: 'dojox', location: './bower_components/dojox' },
-                    { name: 'xml', location: './tests/xml'}
+                    { name: 'xml', location: './tests/xml'},
+                    { name: 'Base', location: './src/plugins/Base'}
                 ]
             },
 
@@ -91,7 +92,7 @@ define(
                 'tests/ElementFactory',
                 'tests/plugins/Core/Core',
                 'tests/ReMarkdown',
-                //'tests/plugins/Base/Base'
+                'tests/plugins/Base/quote'
             ],
 
             // Functional test suite(s) to run in each browser once non-functional tests are completed

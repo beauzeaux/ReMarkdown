@@ -1,17 +1,9 @@
 BlockQuote =
-    lines
-:
-('>'
-chars:(!(NewLine)
-c:.
+    lines:( '>'
+            chars:( !(NewLine)
+                    c:. { return c })*
+            NewLine ?
+            {return chars.join('')})+
 {
-    return c
-}
-)*
-NewLine ?
-{return chars.join('')}
-)
-+
-{
-    return options.element('BlockQuote', lines);
+    return options.elementFactory.element('BlockQuote', lines);
 }

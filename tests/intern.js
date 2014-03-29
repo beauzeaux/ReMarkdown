@@ -85,7 +85,13 @@ define(
             },
 
             // Non-functional test suite(s) to run in each browser
-            suites: [ 'tests/PluginLoader', 'tests/ElementFactory', 'tests/xmlCompare', 'tests/plugins/Core/Core' ],
+            suites: [
+                'tests/xmlCompare', //part of the test suite
+                'tests/PluginLoader',
+                'tests/ElementFactory',
+                'tests/plugins/Core/Core',
+                'tests/ReMarkdown'
+            ],
 
             // Functional test suite(s) to run in each browser once non-functional tests are completed
             functionalSuites: [ /* 'myPackage/tests/functional' */ ],
@@ -93,4 +99,5 @@ define(
             // A regular expression matching URLs to files that should not be included in code coverage analysis
             excludeInstrumentation: /^tests\//
         }
-    });
+    }
+);

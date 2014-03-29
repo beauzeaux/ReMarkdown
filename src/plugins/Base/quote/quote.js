@@ -1,5 +1,5 @@
 define(
-    ['dojo/text!Base/quote/blockQuoteRule.pegjs', 'Base/quote/blockQuoteElement'],
+    ['dojo/text!./blockQuoteRule.pegjs', './blockQuoteElement'],
     function (grammar, blockQuoteRenderer) {
         return {
             name: "Quote",

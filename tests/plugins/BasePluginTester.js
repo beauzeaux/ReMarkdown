@@ -103,4 +103,7 @@ define([
                 }
             });
         }
+        return {
+            TestPlugin: TestPlugin
+        }
     });

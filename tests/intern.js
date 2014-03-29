@@ -92,7 +92,7 @@ define(
                 'tests/ElementFactory',
                 'tests/plugins/Core/Core',
                 'tests/ReMarkdown',
-                'tests/plugins/Base/quote'
+                'tests/plugins/Base/main.js'
             ],
 
             // Functional test suite(s) to run in each browser once non-functional tests are completed

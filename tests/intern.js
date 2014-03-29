@@ -90,7 +90,8 @@ define(
                 'tests/PluginLoader',
                 'tests/ElementFactory',
                 'tests/plugins/Core/Core',
-                'tests/ReMarkdown'
+                'tests/ReMarkdown',
+                //'tests/plugins/Base/Base'
             ],
 
             // Functional test suite(s) to run in each browser once non-functional tests are completed

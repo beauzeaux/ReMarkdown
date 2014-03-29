@@ -3,13 +3,14 @@ define([
     "intern/chai!assert",
     "ReMarkdown/PluginLoader",
     "ReMarkdown/ElementFactory",
+    "dojo/string",
     "dojo/Deferred",
     "dojo/promise/all",
     "xml/parser",
     "xml/equal",
     "ReMarkdown/pegjs"
 ],
-    function (registerSuite, assert, PluginLoader, ElementFactory, Deferred, all, dojoXML, xmlCmp, pegjs) {
+    function (registerSuite, assert, PluginLoader, ElementFactory, dojoString, Deferred, all, dojoXML, xmlCmp, pegjs) {
         /**
          * Tests a plugin or plugin collection against the basic sanity checks
          * @param def an object of the form
@@ -46,12 +47,9 @@ define([
                         }
                         return ret;
                     });
-                    parser.then(dfd.callback(function (parser))
-                    {
+                    parser.then(dfd.callback(function (parser) {
                         assert(parser != null, "Grammar is valid");
-                    }
-                    )
-                    ;
+                    }));
                 },
                 "Overwrites Core": function () {
                     return pl.manifest().then(function (manifest) {
@@ -82,22 +80,36 @@ define([
                     });
                 },
                 "Sync Render": function () {
-                    var dfd = this.async(1000);
+                    var dfd = this.async(1000, def.renderers.length);
                     efp.then(function (ef) {
                         for (key in def.renderers) {
                             var sync = ef.element('Sync', 'Test');
-                            var ret = ef.element(key, sync);
-                            when(ret).then(dfd.callback(function (result))
-                            {
-                                var expected = dojoString.substitute(dfd.renderers[key], "Sync:Test");
+                            var ret = ef.element(key, [sync]);
+                            ret.then(dfd.callback(function (result) {
+                                var expected = dojoString.substitute(def.renderers[key], {content: "Sync:Test"});
                                 var a = dojoXML.parse(expected);
                                 var b = dojoXML.parse(result);
                                 var cmp = new xmlCmp();
                                 var ret = cmp.areEqual(a, b);
-                                assert(ret, def.name + ":" + key + " renders correctly");
-                            }
-                        )
-                            ;
+                                assert(ret, def.name + ":" + key + " renders correctly\n" + result + "\n" + expected);
+                            }));
+                        }
+                    });
+                },
+                "Async Render": function () {
+                    var dfd = this.async(1000, def.renderers.length);
+                    efp.then(function (ef) {
+                        for (key in def.renderers) {
+                            var sync = ef.element('Async', 'Test');
+                            var ret = ef.element(key, [sync]);
+                            ret.then(dfd.callback(function (result) {
+                                var expected = dojoString.substitute(def.renderers[key], {content: "Async:Test"});
+                                var a = dojoXML.parse(expected);
+                                var b = dojoXML.parse(result);
+                                var cmp = new xmlCmp();
+                                var ret = cmp.areEqual(a, b);
+                                assert(ret, def.name + ":" + key + " renders correctly\n" + result + "\n" + expected);
+                            }));
                         }
                     });
                 }

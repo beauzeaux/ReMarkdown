@@ -54,7 +54,7 @@ define([
             var dfd = this.async(10000, 1);
             efp.then(function (ef) {
                 var sync = ef.element('Sync', 'Test');
-                var pRes = ef.element('Document', [sync]);
+                var pRes = ef.element('Document', sync);
                 pRes.then(dfd.callback(function (result) {
                     var expected = "<!DOCTYPE html><html><head><title></title></head><body>Sync:Test</body></html>";
                     var a = dojoXML.parse(expected);
@@ -68,7 +68,7 @@ define([
             var dfd = this.async(10000, 1);
             efp.then(function (ef) {
                 var async = ef.element('Async', 'Test');
-                var pRes = ef.element('Document', [async]);
+                var pRes = ef.element('Document', async);
                 pRes.then(dfd.callback(function (result) {
                     var expected = "<!DOCTYPE html><html><head><title></title></head><body>Async:Test</body></html>";
                     var a = dojoXML.parse(expected);

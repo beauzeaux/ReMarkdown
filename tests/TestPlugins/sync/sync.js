@@ -1,5 +1,5 @@
-define(['dojo/text!./sync.pegjs'],
-    function (grammar) {
+define(['dojo/text!./sync.pegjs', 'dojo/Deferred'],
+    function (grammar, Deferred) {
         var manifest = {
             name: "Sync",
             grammar: {
@@ -10,7 +10,9 @@ define(['dojo/text!./sync.pegjs'],
             },
             renderers: {
                 Sync: function (values) {
-                    return "Sync:" + values;
+                    var dfd = new Deferred();
+                    dfd.resolve("Sync:" + values);
+                    return dfd.promise;
                 }
             }
         };

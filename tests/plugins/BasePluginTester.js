@@ -87,7 +87,7 @@ define([
                     efp.then(function (ef) {
                         for (key in def.renderers) {
                             var sync = ef.element('Sync', 'Test');
-                            var ret = ef.element(key, [sync]);
+                            var ret = ef.element(key, sync);
                             ret.then(dfd.callback(function (result) {
                                 var expected = dojoString.substitute(def.renderers[key], {content: "Sync:Test"});
                                 var a = dojoXML.parse(expected);
@@ -104,7 +104,7 @@ define([
                     efp.then(function (ef) {
                         for (key in def.renderers) {
                             var sync = ef.element('Async', 'Test');
-                            var ret = ef.element(key, [sync]);
+                            var ret = ef.element(key, sync);
                             ret.then(dfd.callback(function (result) {
                                 var expected = dojoString.substitute(def.renderers[key], {content: "Async:Test"});
                                 var a = dojoXML.parse(expected);

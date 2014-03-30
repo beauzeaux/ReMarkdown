@@ -14,10 +14,13 @@ define([
             assert(pl != null, "New Creates a non-null object");
         },
         "Element Rendering (sync)": function () {
-            return pl.renderers().then(function (renderers) {
+            var dfd = this.async(10000);
+            pl.renderers().then(function (renderers) {
                 var ef = new ElementFactory(renderers);
                 var ret = ef.element('Sync', 'Hello World');
-                assert.strictEqual(ret, 'Sync:Hello World', 'Synchronus rendering');
+                ret.then(dfd.callback(function(value){
+                    assert.strictEqual(value, 'Sync:Hello World', 'Synchronus rendering');
+                }));
             });
         },
         "Element Rendering (async)": function () {

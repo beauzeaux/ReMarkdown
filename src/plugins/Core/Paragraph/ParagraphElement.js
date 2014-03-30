@@ -1,12 +1,9 @@
 define(
     ['dojo/string', 'dojo/text!./Paragraph.html', 'dojo/promise/all'],
     function (dojoString, template, all) {
-        return function (promises) {
-            //wait until every one of the inlines is done rendering
-            return all(promises).then(function (strs) {
-                //strings should be a bunch of inlines
-                //combine them using a space character
-                var text = strs.join(' ');
+        return function (promise) {
+            //wait until the text is ready
+            return promise.then(function (text) {
                 var ret = dojoString.substitute(template, {text: text});
                 return ret;
             });

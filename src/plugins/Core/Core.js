@@ -12,6 +12,7 @@ define(["ReMarkdown/PluginLoader", "dojo/when"],
             "Core/Paragraph/Paragraph",
             "Core/Document/Document",
             "Core/Blocks/Blocks",
+            "Core/Spans/Spans"
         ];
         var pLoader = new PluginLoader(plugins);
         var promise = pLoader.manifest();

@@ -15,13 +15,6 @@ Document =
     var ret = options.elementFactory.element('Document', blocks);
     return ret;
 }
-SpanStart =
-    value:Span
-    NewLine*
-    EOF
-{
-    return value;
-}
 
 // Generated Elements
 Prelude =
@@ -50,11 +43,17 @@ Block =
 Blocks =
     blocks:Block+
 {
-    return options.elementFactory.element('Blocks', blocks)
+    return options.elementFactory.element('Blocks', blocks);
+}
+
+Spans =
+    spans:(vals:Inline+ NewLine? {return vals})+
+{
+    return options.elementFactory.element('Spans', spans);
 }
 
 Paragraph =
-    vals:(val:Inline+ NewLine? {return val.join('')})+
+    vals:Spans
 {
     var element = options.elementFactory.element('Paragraph', vals);
     return element;

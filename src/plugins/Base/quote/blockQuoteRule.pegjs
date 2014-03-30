@@ -5,5 +5,7 @@ BlockQuote =
             NewLine ?
             {return chars.join('')})+
 {
-    return options.elementFactory.element('BlockQuote', lines);
+    var pText = options.parser.parse(lines, {startRule: 'Blocks'});
+    var ret = options.elementFactory.element('BlockQuote', pText);
+    return ret;
 }

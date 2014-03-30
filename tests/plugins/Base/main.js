@@ -1,6 +1,7 @@
 define([
     "./quote/main",
-    "./code/code"
+    "./code/code",
+    "./list/list"
 ], function(){
 
 });

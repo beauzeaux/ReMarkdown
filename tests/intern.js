@@ -26,7 +26,7 @@ define(
             capabilities: {
                 'selenium-version': '2.37.0',
                 'idle-timeout': 60,
-                'max-duration': 90,
+                'max-duration': 600,
                 'video-upload-on-pass': false
             },
 

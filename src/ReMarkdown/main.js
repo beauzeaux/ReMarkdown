@@ -38,7 +38,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/when", "dojo/promise/all"
                         var options = {
                             elementFactory: new ElementFactory(obj.renderers),
                             parser: self,
-                            allowedRules: ["start", "Document", "Blocks", "Spans"]
+                            allowedStartRules: ["start", "Document", "Blocks", "Spans"]
                         };
                         //create the parserFactory closure
                         var ret = function (input, opts) {

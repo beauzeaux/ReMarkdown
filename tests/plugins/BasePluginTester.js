@@ -116,7 +116,31 @@ define([
             });
         };
 
+        var TestParse = function(def) {
+            registerSuite({
+                name: 'ParseTest: ' + def.name,
+                setup: function () {
+                    var pluginList = ["TestPlugins/TestPlugins"].concat(def.paths);
+                    parser = new ReMarkdown({pluginList: pluginList});
+                },
+                "Parsing": function(){
+                    dfd = this.async(10000, def.tests.length);
+                    def.tests.map(function(test){
+                        var promise = parser.parse(test[0]);
+                        promise.then(dfd.resolve(function(result){
+                            var a = dojoXML.parse(test[1]);
+                            var b = dojoXML.parse(result);
+                            var cmp = new xmlCmp();
+                            var ret = cmp.areEqual(a,b);
+                            assert(ret, "Parse test");
+                        }));
+                    });
+                }
+            });
+        };
+
         return {
-            TestPlugin: TestPlugin
+            TestPlugin: TestPlugin,
+            TestParse: TestParse
         }
     });

@@ -85,7 +85,7 @@ define([
                 "Sync Render": function () {
                     var dfd = this.async(1000, def.renderers.length);
                     efp.then(function (ef) {
-                        for (key in def.renderers) {
+                        Object.keys(def.renderers).map(function(key) {
                             var sync = ef.element('Sync', 'Test');
                             var ret = ef.element(key, sync);
                             ret.then(dfd.callback(function (result) {
@@ -96,13 +96,13 @@ define([
                                 var ret = cmp.areEqual(a, b);
                                 assert(ret, def.name + ":" + key + " renders correctly\n" + result + "\n" + expected);
                             }));
-                        }
+                        });
                     });
                 },
                 "Async Render": function () {
                     var dfd = this.async(1000, def.renderers.length);
                     efp.then(function (ef) {
-                        for (key in def.renderers) {
+                        Object.keys(def.renderers).map(function(key) {
                             var sync = ef.element('Async', 'Test');
                             var ret = ef.element(key, sync);
                             ret.then(dfd.callback(function (result) {
@@ -113,7 +113,7 @@ define([
                                 var ret = cmp.areEqual(a, b);
                                 assert(ret, def.name + ":" + key + " renders correctly\n" + result + "\n" + expected);
                             }));
-                        }
+                        });
                     });
                 }
             });

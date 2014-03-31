@@ -10,8 +10,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/when", "dojo/promise/all"
                  */
                 pluginList: [
                     "Core/Core"
-                ],
-                allowedStartRules: ["start", "Document", "Blocks", "Spans"]
+                ]
             },
 
             /*
@@ -39,18 +38,19 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/when", "dojo/promise/all"
                         var options = {
                             elementFactory: new ElementFactory(obj.renderers),
                             parser: self,
+                            allowedRules: ["start", "Document", "Blocks", "Spans"]
                         };
                         //create the parserFactory closure
                         var ret = function (input, opts) {
                             lang.mixin(options, opts);
                             try {
-                                var parser = pegjs.buildParser(obj.grammar, self._options);
+                                var parser = pegjs.buildParser(obj.grammar, options);
                             } catch (ex) {
                                 console.log("Failed to build parser??");
                                 console.log(ex.message);
                                 console.log(ex);
                             }
-                            var promise = parser.parse(input, self._options);
+                            var promise = parser.parse(input, options);
                             return promise;
                         };
                         return ret;

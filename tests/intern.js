@@ -85,7 +85,7 @@ define(
 
             // Non-functional test suite(s) to run in each browser
             suites: [
-                'tests/xmlCompare', //part of the test suite
+                'tests/xmlcmp/xmlCompare', //part of the test suite
                 'tests/PluginLoader',
                 'tests/ElementFactory',
                 'tests/plugins/Core/Core',

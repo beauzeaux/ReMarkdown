@@ -35,7 +35,7 @@ Span =
 Block =
     EmptyLine*
     element:BlockElement
-(EmptyLine / EmptyLine * EOF)
+(EmptyLine* EOF / EmptyLine)
 {
     return element;
 }

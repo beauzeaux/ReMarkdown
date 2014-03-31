@@ -8,11 +8,19 @@ define([
     "xml/parser",
     "xml/equal",
     "ReMarkdown/pegjs",
+    "../BasePluginTester",
+    "dojo/text!./1_in.rm",
+    "dojo/text!./1_out.html",
+    "dojo/text!./2_in.rm",
+    "dojo/text!./2_out.html",
     //These are just to load the individual tests!
     "./Paragraph",
     "./Document",
     "./Blocks"
-], function (registerSuite, assert, PluginLoader, ElementFactory, Deferred, all, dojoXML, xmlCmp, pegjs) {
+], function (registerSuite, assert, PluginLoader, ElementFactory,
+             Deferred, all, dojoXML, xmlCmp, pegjs, PluginTester,
+             test1in, test1out, test2in, test2out
+    ) {
     registerSuite({
         name: 'Core Plugins',
         setup: function () {
@@ -58,4 +66,12 @@ define([
             });
         }
     });
+    PluginTester.TestParse({
+        name: "Core",
+        paths: ["Core/Core"],
+        tests: [
+            [test1in, test1out],
+            [test2in, test2out]
+        ]
+    })
 });

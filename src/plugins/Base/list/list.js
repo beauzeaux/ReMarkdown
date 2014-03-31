@@ -1,14 +1,5 @@
-requirejs.config({
-    paths: {
-        grammar: 'plugins/list/listGrammar.pegjs',
-        listItemRenderer: 'plugins/list/liElement',
-        unorderedListRenderer: 'plugins/list/ulElement',
-        orderedListRenderer: 'plugins/list/olElement'
-    }
-});
-
 define(
-    ["text!grammar", "listItemRenderer", "unorderedListRenderer", "orderedListRenderer"],
+    ["dojo/text!./listGrammar.pegjs", "./liElement", "./ulElement", "./olElement"],
     function (grammar, listItemRenderer, unorderedListRenderer, orderedListRenderer) {
         return {
             name: "List",

@@ -1,74 +1,62 @@
+ListLine =
+    '  '
+    chars:((!NewLine) c:. {return c;})*
+    NewLine?
+{
+    return chars.join('');
+}
+
 OrderedList =
     items:OrderedListElement+
 {
     return element = options.elementFactory.element('OrderedList', items);
 }
 
+OrderedFirstLine =
+    [0 - 9]+ (')' / '.')
+    ' '
+    chars:(!NewLine c:. {return c;})*
+    NewLine?
+{
+    return chars.join('');
+}
+
 OrderedListElement =
-    line1:( OrderedListPrefix
-            chars:(!(NewLine)
-            c:. {return c;})*
-            NewLine? {return chars.join('')})
-    lines:( '  '
-            chars:( (!NewLine)
-                    c:. { return c; })*
-            NewLine ? {return chars.join('')})*
+    line1:OrderedFirstLine
+    lines:ListLine+
 {
     var input = line1 += "\n" + lines.join('\n')
     //Render the contents
-    var parser = options.parserFactory.parser('Blocks');
-    var content = parser.parse(input);
-
-    var element = options.elementFactory.element('ListItem');
-    return element(content);
+    var content = options.parser.parse(input, {startRule:'Blocks'});
+    var element = options.elementFactory.element('ListItem', content);
+    return element
 }
-OrderedListPrefix =
-    [0 - 9] + (')' / '.')
-' '
+
+
 
 UnorderedList =
-    items
-:
-UnorderedListElement +
+    items:UnorderedListElement+
 {
-    var content = items.join('\n');
-var element = options.elementFactory.element('UnorderedList');
-return element(content);
+    var element = options.elementFactory.element('UnorderedList');
+    return element(content);
+}
+
+UnorderedFirstLine =
+    ('-' / '*')
+    ' '
+    chars:(!NewLine c:. {return c;})*
+    NewLine?
+{
+    return chars.join('');
 }
 
 UnorderedListElement =
-    line1
-:
-(UnorderedListPrefix
-chars:(!(NewLine)
-c:.
-{
-    return c;
-}
-)*
-NewLine ? {return chars.join('')}
-)
-lines: ('  '
-chars:((!NewLine)
-c:.
-{
-    return c;
-}
-)*
-NewLine ? {return chars.join('')}
-)*
-
+    line1: UnorderedFirstLine
+    lines: ListLine*
 {
     var input = line1 += "\n" + lines.join('\n')
     //Render the contents
-    var parser = options.parserFactory.parser('Blocks');
-    var content = parser.parse(input);
-
-    var element = options.elementFactory.element('ListItem');
-    return element(content);
+    var content = options.parser.parse(input, {startRule:'Blocks'});
+    var element = options.elementFactory.element('ListItem', content);
+    return element
 }
-
-UnorderedListPrefix =
-    ('-' / '*')
-' '
-

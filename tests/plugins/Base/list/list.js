@@ -9,7 +9,7 @@ define([
         blocks: ["UnorderedList", "OrderedList"],
         spans: [],
         renderers: {
-            "ListItem": '<li>${content}<li>',
+            "ListItem": '<li>${content}</li>',
             "UnorderedList" : '<ul>${content}</ul>',
             "OrderedList" : '<ol>${content}</ol>'
         }

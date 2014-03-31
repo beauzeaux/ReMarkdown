@@ -35,13 +35,13 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/when", "dojo/promise/all"
                 self = this;
                 this._parserFactory =
                     all({grammar: grammar, renderers: renderers}).then(function (obj) {
-                        var options = {
-                            elementFactory: new ElementFactory(obj.renderers),
-                            parser: self,
-                            allowedStartRules: ["start", "Document", "Blocks", "Spans"]
-                        };
                         //create the parserFactory closure
                         var ret = function (input, opts) {
+                            var options = {
+                                elementFactory: new ElementFactory(obj.renderers),
+                                parser: self,
+                                allowedStartRules: ["start", "Document", "Blocks", "Spans"]
+                            };
                             lang.mixin(options, opts);
                             try {
                                 var parser = pegjs.buildParser(obj.grammar, options);

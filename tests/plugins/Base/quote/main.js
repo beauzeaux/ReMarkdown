@@ -22,8 +22,8 @@ define([
         name: "Quote",
         paths: ["Base/quote/quote"],
         tests:[
-            [test1in, test1out],
-            [test2in, test2out]
+            [test2in, test2out],
+            [test1in, test1out]
         ]
-    })
+    });
 });

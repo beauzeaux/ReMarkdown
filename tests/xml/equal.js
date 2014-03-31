@@ -3,9 +3,13 @@
  *
  *
  */
-define(["dojo/_base/declare", "dojo/_base/array", "dojo/has", "dojo/has!host-node?dojo/node!xmldom", ],
-    function (declare, array, has, xmldom) {
-
+define([
+    "dojo/_base/declare",
+    "dojo/_base/array",
+    "./zip",
+    "dojo/has",
+    "dojo/has!host-node?dojo/node!xmldom", ],
+    function (declare, array, zip, has, xmldom) {
         EquivXML = declare(null, {
             _xml: null,
             _opts: {
@@ -40,7 +44,7 @@ define(["dojo/_base/declare", "dojo/_base/array", "dojo/has", "dojo/has!host-nod
                 if (this._opts.normWhite) {
                     return nodeA.textContent.trim().replace(/\s+/g, ' ') == nodeB.textContent.trim().replace(/\s+/g, ' ');
                 } else {
-                    return nodeA.nodeValue == nodeB.nodeValue;
+                    return nodeA.textContent == nodeB.textContent;
                 }
             },
             _compareCDATA: function (nodeA, nodeB) {
@@ -87,13 +91,13 @@ define(["dojo/_base/declare", "dojo/_base/array", "dojo/has", "dojo/has!host-nod
                 if (nodelistA.length != nodelistB.length) {
                     return false;
                 }
+                //zip them together so it can be mapped
+                var zipped = zip([nodelistA,nodelistB]);
                 //same order of nodes required for this compare
-                for (i = 0; i < nodelistA.length; i++) {
-                    if (!this._compareNodes(nodelistA[i], nodelistB[i])) {
-                        return false;
-                    }
-                }
-                return true;
+                var ret = array.every(zipped, function(pair){
+                    return this._compareNodes(pair[0], pair[1]);
+                },  this);
+                return ret;
             },
             _nodeList: function (node) {
                 var list = node.childNodes;

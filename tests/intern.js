@@ -67,6 +67,7 @@ define(
             // can be used here
             loader: {
                 async: 1,
+                cacheBust:true,
                 map: {
                     '*': {
                         'dojo/text': './tests/text/text'

@@ -1,5 +1,5 @@
 ListLine =
-    '  '
+    '  ' ' '?
     chars:((!NewLine) c:. {return c;})*
     NewLine?
 {
@@ -9,11 +9,11 @@ ListLine =
 OrderedList =
     items:OrderedListElement+
 {
-    return element = options.elementFactory.element('OrderedList', items);
+    return options.elementFactory.element('OrderedList', items);
 }
 
 OrderedFirstLine =
-    [0 - 9]+ (')' / '.')
+    [0-9]+ (')' / '.')
     ' '
     chars:(!NewLine c:. {return c;})*
     NewLine?
@@ -23,13 +23,13 @@ OrderedFirstLine =
 
 OrderedListElement =
     line1:OrderedFirstLine
-    lines:ListLine+
+    lines:ListLine*
 {
-    var input = line1 += "\n" + lines.join('\n')
+    var input = line1 += "\n" + lines.join('\n');
     //Render the contents
     var content = options.parser.parse(input, {startRule:'Blocks'});
     var element = options.elementFactory.element('ListItem', content);
-    return element
+    return element;
 }
 
 
@@ -37,8 +37,8 @@ OrderedListElement =
 UnorderedList =
     items:UnorderedListElement+
 {
-    var element = options.elementFactory.element('UnorderedList');
-    return element(content);
+    var element = options.elementFactory.element('UnorderedList', items);
+    return element;
 }
 
 UnorderedFirstLine =
@@ -58,5 +58,5 @@ UnorderedListElement =
     //Render the contents
     var content = options.parser.parse(input, {startRule:'Blocks'});
     var element = options.elementFactory.element('ListItem', content);
-    return element
+    return element;
 }

@@ -16,7 +16,6 @@
     ],
     "license": "MIT",
     "homepage": "rmdocs.com",
-    "private": true,
     "ignore": [
         "**/.*",
         "node_modules",

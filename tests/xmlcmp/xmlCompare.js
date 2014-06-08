@@ -26,9 +26,9 @@ define([
             assert(!eq.areEqual(a, c), "node name not equiv");
         },
         "OpenCloseOpenClose": function() {
-            var a = xmlParser.parse('<a>Hi</a><b>Hi</b>');
-            var b = xmlParser.parse('<a>Hi</a><b>Hi</b>');
-            var c = xmlParser.parse('<a>Hi</a><b>Hello</b>');
+            var a = xmlParser.parse('<o><c><a>Hi</a><b>Hi</b></c></o>');
+            var b = xmlParser.parse('<o><c><a>Hi</a><b>Hi</b></c></o>');
+            var c = xmlParser.parse('<o><c><a>Hi</a><b>Hello</b></c></o>');
 
             var eq = new xmlEqual();
 
